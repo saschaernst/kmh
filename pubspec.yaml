@@ -39,6 +39,12 @@ dependencies:
   flutter_bloc: ^8.1.2
   tools:
     path: "../../packages/tools"
+  appwrite_tools:
+    path: "../../packages/appwrite_tools"
+  sembast_tools:
+    path: "../../packages/sembast_tools"
+  storage_tools:
+    path: "../../packages/storage_tools"
 
 dev_dependencies:
   flutter_test:
