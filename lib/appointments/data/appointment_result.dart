@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kmh/appiontments/data/appointment_state.dart';
+import 'package:kmh/appointments/data/appointment_state.dart';
 
 part 'appointment_result.freezed.dart';
 part 'appointment_result.g.dart';

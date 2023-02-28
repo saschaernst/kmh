@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:kmh/appiontments/package.dart';
+import 'package:kmh/appointments/package.dart';
 import 'package:storage_tools/remote.dart';
 import 'package:tools/extensions.dart';
 

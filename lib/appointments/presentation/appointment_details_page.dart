@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kmh/appiontments/package.dart';
+import 'package:kmh/appointments/package.dart';
 import 'package:storage_tools/remote.dart';
 
-class AppointmentListPage extends StatelessWidget {
-  const AppointmentListPage({super.key});
+class AppointmentDetailsPage extends StatelessWidget {
+  final String _id;
+
+  const AppointmentDetailsPage(this._id, {super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Termine'),
+          title: const Text('Termin'),
         ),
         body: BlocProvider(
-          create: (_) => AppointmentsCubit(
+          create: (context) => AppointmentCubit(
             context.read<RemoteStorageService<Company>>(),
             context.read<RemoteStorageService<AppointmentDetails>>(),
-            context.read<RemoteStorageService<AppointmentResult>>(),
-          ),
-          child: const AppointmentListWidget(),
+          )..init(_id),
+          child: const AppointmentDetailWidget(),
         ),
       );
 }

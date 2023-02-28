@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kmh/appiontments/package.dart';
+import 'package:kmh/appointments/package.dart';
 
 class AppView extends StatelessWidget {
   AppView({super.key});

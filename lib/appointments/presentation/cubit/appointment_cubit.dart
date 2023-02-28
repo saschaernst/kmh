@@ -1,14 +1,13 @@
 import 'package:bloc/bloc.dart';
-import 'package:kmh/appiontments/package.dart';
-import 'package:kmh/appiontments/presentation/cubit/appointment_details_state.dart';
+import 'package:kmh/appointments/package.dart';
+import 'package:kmh/appointments/presentation/cubit/appointment_details_state.dart';
 import 'package:storage_tools/remote.dart';
 
 class AppointmentCubit extends Cubit<AppointmentDetailsState> {
   final RemoteStorageService<Company> _companies;
   final RemoteStorageService<AppointmentDetails> _details;
-  final RemoteStorageService<AppointmentResult> _results;
 
-  AppointmentCubit(this._companies, this._details, this._results)
+  AppointmentCubit(this._companies, this._details)
       : super(const AppointmentDetailsState.loading());
 
   Future<void> init(String id) async {

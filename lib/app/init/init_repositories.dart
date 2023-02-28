@@ -1,7 +1,7 @@
 import 'package:appwrite_tools/appwrite_tools.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kmh/app/init/package.dart';
-import 'package:kmh/appiontments/package.dart';
+import 'package:kmh/appointments/package.dart';
 import 'package:tools/services.dart';
 
 Future<List<RepositoryProvider>> initRepositories() async {

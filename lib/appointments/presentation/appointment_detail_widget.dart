@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:kmh/appiontments/presentation/cubit/appointment_cubit.dart';
+import 'package:kmh/appointments/presentation/cubit/appointment_cubit.dart';
 
 class AppointmentDetailWidget extends StatelessWidget {
   const AppointmentDetailWidget({super.key});
