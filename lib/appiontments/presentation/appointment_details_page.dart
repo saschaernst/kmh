@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kmh/appiontments/package.dart';
+import 'package:storage_tools/remote.dart';
 
 class AppointmentDetailsPage extends StatelessWidget {
   final String _id;
@@ -11,6 +13,13 @@ class AppointmentDetailsPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Termin'),
         ),
-        body: AppointmentDetailWidget(_id),
+        body: BlocProvider(
+          create: (context) => AppointmentCubit(
+            context.read<RemoteStorageService<Company>>(),
+            context.read<RemoteStorageService<AppointmentDetails>>(),
+            context.read<RemoteStorageService<AppointmentResult>>(),
+          )..init(_id),
+          child: const AppointmentDetailWidget(),
+        ),
       );
 }

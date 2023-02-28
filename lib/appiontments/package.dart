@@ -6,5 +6,6 @@ export 'presentation/appointment_detail_widget.dart';
 export 'presentation/appointment_details_page.dart';
 export 'presentation/appointment_list_page.dart';
 export 'presentation/appointment_list_widget.dart';
+export 'presentation/cubit/appointment_cubit.dart';
 export 'presentation/cubit/appointments_cubit.dart';
 export 'presentation/cubit/appointments_state.dart';
