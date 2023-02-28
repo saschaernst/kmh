@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kmh/appiontments/package.dart';
 import 'package:storage_tools/remote.dart';
-import 'package:tools/extensions.dart';
 
 class AppointmentListPage extends StatelessWidget {
   const AppointmentListPage({super.key});
@@ -10,7 +9,7 @@ class AppointmentListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Termine'.hardcoded),
+          title: const Text('Termine'),
         ),
         body: BlocProvider(
           create: (_) => AppointmentsCubit(

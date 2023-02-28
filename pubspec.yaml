@@ -47,6 +47,7 @@ dependencies:
     path: "../../packages/storage_tools"
   bloc: ^8.1.1
   intl: ^0.18.0
+  go_router: ^6.2.0
 
 dev_dependencies:
   flutter_test:

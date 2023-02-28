@@ -2,6 +2,8 @@ export 'data/appointment_details.dart';
 export 'data/appointment_result.dart';
 export 'data/appointment_state.dart';
 export 'data/company.dart';
+export 'presentation/appointment_detail_widget.dart';
+export 'presentation/appointment_details_page.dart';
 export 'presentation/appointment_list_page.dart';
 export 'presentation/appointment_list_widget.dart';
 export 'presentation/cubit/appointments_cubit.dart';
