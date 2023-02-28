@@ -20,7 +20,6 @@ Company _$CompanyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Company {
-  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get street => throw _privateConstructorUsedError;
   String get zip => throw _privateConstructorUsedError;
@@ -38,12 +37,7 @@ abstract class $CompanyCopyWith<$Res> {
       _$CompanyCopyWithImpl<$Res, Company>;
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String street,
-      String zip,
-      String city,
-      String contact});
+      {String name, String street, String zip, String city, String contact});
 }
 
 /// @nodoc
@@ -59,7 +53,6 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? name = null,
     Object? street = null,
     Object? zip = null,
@@ -67,10 +60,6 @@ class _$CompanyCopyWithImpl<$Res, $Val extends Company>
     Object? contact = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -103,12 +92,7 @@ abstract class _$$_CompanyCopyWith<$Res> implements $CompanyCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      String name,
-      String street,
-      String zip,
-      String city,
-      String contact});
+      {String name, String street, String zip, String city, String contact});
 }
 
 /// @nodoc
@@ -121,7 +105,6 @@ class __$$_CompanyCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? name = null,
     Object? street = null,
     Object? zip = null,
@@ -129,10 +112,6 @@ class __$$_CompanyCopyWithImpl<$Res>
     Object? contact = null,
   }) {
     return _then(_$_Company(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -160,14 +139,11 @@ class __$$_CompanyCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Company implements _Company {
-  const _$_Company(
-      this.id, this.name, this.street, this.zip, this.city, this.contact);
+  const _$_Company(this.name, this.street, this.zip, this.city, this.contact);
 
   factory _$_Company.fromJson(Map<String, dynamic> json) =>
       _$$_CompanyFromJson(json);
 
-  @override
-  final String id;
   @override
   final String name;
   @override
@@ -181,7 +157,7 @@ class _$_Company implements _Company {
 
   @override
   String toString() {
-    return 'Company(id: $id, name: $name, street: $street, zip: $zip, city: $city, contact: $contact)';
+    return 'Company(name: $name, street: $street, zip: $zip, city: $city, contact: $contact)';
   }
 
   @override
@@ -189,7 +165,6 @@ class _$_Company implements _Company {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Company &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.zip, zip) || other.zip == zip) &&
@@ -200,7 +175,7 @@ class _$_Company implements _Company {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, name, street, zip, city, contact);
+      Object.hash(runtimeType, name, street, zip, city, contact);
 
   @JsonKey(ignore: true)
   @override
@@ -217,18 +192,11 @@ class _$_Company implements _Company {
 }
 
 abstract class _Company implements Company {
-  const factory _Company(
-      final String id,
-      final String name,
-      final String street,
-      final String zip,
-      final String city,
-      final String contact) = _$_Company;
+  const factory _Company(final String name, final String street,
+      final String zip, final String city, final String contact) = _$_Company;
 
   factory _Company.fromJson(Map<String, dynamic> json) = _$_Company.fromJson;
 
-  @override
-  String get id;
   @override
   String get name;
   @override

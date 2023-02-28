@@ -46,12 +46,14 @@ Future<List<RepositoryProvider>> initRepositories() async {
     'appointment_results',
     (data) => data.toJson(),
     AppointmentResult.fromJson,
-    AppointmentResult.empty,
+    AppointmentResult.open,
   );
 
-  return [
+  final repos = [
     RepositoryProvider(create: (_) => companies),
     RepositoryProvider(create: (_) => appointmentDetails),
     RepositoryProvider(create: (_) => appointmentResults),
   ];
+
+  return repos;
 }

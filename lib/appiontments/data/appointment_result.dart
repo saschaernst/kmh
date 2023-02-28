@@ -11,7 +11,7 @@ class AppointmentResult with _$AppointmentResult {
     @Default('') String comment,
   ]) = _AppointmentResult;
 
-  factory AppointmentResult.empty() => const AppointmentResult(
+  factory AppointmentResult.open() => const AppointmentResult(
         AppointmentState.open,
       );
 

@@ -7,7 +7,6 @@ part of 'company.dart';
 // **************************************************************************
 
 _$_Company _$$_CompanyFromJson(Map<String, dynamic> json) => _$_Company(
-      json['id'] as String,
       json['name'] as String,
       json['street'] as String,
       json['zip'] as String,
@@ -17,7 +16,6 @@ _$_Company _$$_CompanyFromJson(Map<String, dynamic> json) => _$_Company(
 
 Map<String, dynamic> _$$_CompanyToJson(_$_Company instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'name': instance.name,
       'street': instance.street,
       'zip': instance.zip,

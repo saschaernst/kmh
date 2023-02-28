@@ -41,8 +41,12 @@ Future<RemoteStorageService<T>> initRemoteService<T>(
     getDefault,
   );
 
-  final remoteService =
-      RemoteStorageService(remoteRepo, localRepo, remoteCache, uuids);
+  final remoteService = RemoteStorageService(
+    remoteRepo,
+    localRepo,
+    remoteCache,
+    uuids,
+  );
 
   await remoteService.init();
 

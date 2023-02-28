@@ -6,7 +6,6 @@ part 'company.g.dart';
 @freezed
 class Company with _$Company {
   const factory Company(
-    String id,
     String name,
     String street,
     String zip,
@@ -14,7 +13,7 @@ class Company with _$Company {
     String contact,
   ) = _Company;
 
-  factory Company.empty() => const Company('', '', '', '', '', '');
+  factory Company.empty() => const Company('', '', '', '', '');
 
   factory Company.fromJson(Map<String, dynamic> json) =>
       _$CompanyFromJson(json);

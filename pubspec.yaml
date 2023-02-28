@@ -45,6 +45,8 @@ dependencies:
     path: "../../packages/sembast_tools"
   storage_tools:
     path: "../../packages/storage_tools"
+  bloc: ^8.1.1
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
