@@ -9,7 +9,7 @@ Future<void> main() async {
   runApp(
     MultiRepositoryProvider(
       providers: await initRepositories(),
-      child: const AppView(),
+      child: AppView(),
     ),
   );
 }

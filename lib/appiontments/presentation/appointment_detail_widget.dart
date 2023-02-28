@@ -12,22 +12,52 @@ class AppointmentDetailWidget extends StatelessWidget {
 
     return data.when(
       loading: () => const CircularProgressIndicator.adaptive(),
-      data: (id, date, duration, name, address, city, contact) => Center(
-        child: Card(
-          margin: const EdgeInsets.all(20),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _Entry(Icons.calendar_month, DateFormat.yMMMMd().format(date)),
-                _Entry(Icons.schedule, '$duration min'),
-                _Entry(Icons.store, name),
-                _Entry(Icons.signpost, address),
-                _Entry(Icons.location_city, city),
-                _Entry(Icons.hail, contact),
-              ],
+      data: (id, date, duration, name, address, city, contact) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _Entry(
+                        Icons.calendar_month, DateFormat.yMMMMd().format(date)),
+                    _Entry(Icons.schedule, '$duration min'),
+                    _Entry(Icons.store, name),
+                    _Entry(Icons.signpost, address),
+                    _Entry(Icons.location_city, city),
+                    _Entry(Icons.hail, contact),
+                  ],
+                ),
+              ),
             ),
+            const Spacer(),
+            const _Button(),
+            const _Button(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Button extends StatelessWidget {
+  const _Button();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: ElevatedButton(
+        onPressed: () {},
+        child: const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Text(
+            'action',
+            style: TextStyle(fontSize: 30),
           ),
         ),
       ),
