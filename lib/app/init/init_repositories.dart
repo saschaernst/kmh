@@ -2,6 +2,7 @@ import 'package:appwrite_tools/appwrite_tools.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kmh/app/init/package.dart';
 import 'package:kmh/appointments/package.dart';
+import 'package:storage_tools/remote.dart';
 import 'package:tools/services.dart';
 
 Future<List<RepositoryProvider>> initRepositories() async {
@@ -25,7 +26,8 @@ Future<List<RepositoryProvider>> initRepositories() async {
     (data) => data.toJson(),
     Company.fromJson,
     Company.empty,
-    ['documents'],
+    RemoteStorageMode.readOnly,
+    ['databases.companies.documents'],
   );
 
   final appointmentDetails = await initRemoteService<AppointmentDetails>(
@@ -36,7 +38,8 @@ Future<List<RepositoryProvider>> initRepositories() async {
     (data) => data.toJson(),
     AppointmentDetails.fromJson,
     AppointmentDetails.empty,
-    ['documents'],
+    RemoteStorageMode.readOnly,
+    ['databases.appointment_details.documents'],
   );
 
   final appointmentResults = await initRemoteService<AppointmentResult>(
@@ -47,6 +50,7 @@ Future<List<RepositoryProvider>> initRepositories() async {
     (data) => data.toJson(),
     AppointmentResult.fromJson,
     AppointmentResult.open,
+    RemoteStorageMode.fullAccess,
   );
 
   final repos = [

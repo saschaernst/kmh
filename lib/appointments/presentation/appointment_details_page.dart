@@ -17,7 +17,9 @@ class AppointmentDetailsPage extends StatelessWidget {
           create: (context) => AppointmentCubit(
             context.read<RemoteStorageService<Company>>(),
             context.read<RemoteStorageService<AppointmentDetails>>(),
-          )..init(_id),
+            context.read<RemoteStorageService<AppointmentResult>>(),
+            _id,
+          ),
           child: const AppointmentDetailWidget(),
         ),
       );

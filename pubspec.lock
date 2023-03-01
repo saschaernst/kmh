@@ -344,7 +344,7 @@ packages:
     source: sdk
     version: "0.0.0"
   fpdart:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: fpdart
       sha256: "21053522d5a97347737525c84e8839340a0af3c0ef592f98fac37380fdd6a57b"
@@ -772,7 +772,7 @@ packages:
     source: hosted
     version: "4.5.1"
   state_notifier:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: state_notifier
       sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"

@@ -12,7 +12,8 @@ Future<RemoteStorageService<T>> initRemoteService<T>(
   String collectionId,
   JsonMap Function(T data) toJson,
   T Function(JsonMap json) fromJson,
-  T Function() getDefault, [
+  T Function() getDefault,
+  RemoteStorageMode mode, [
   List<String> channels = const [],
 ]) async {
   final localRepo = await createSembastRepo(
@@ -46,6 +47,7 @@ Future<RemoteStorageService<T>> initRemoteService<T>(
     localRepo,
     remoteCache,
     uuids,
+    mode,
   );
 
   await remoteService.init();

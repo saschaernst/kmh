@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:kmh/appointments/presentation/cubit/appointment_cubit.dart';
 
@@ -35,8 +36,16 @@ class AppointmentDetailWidget extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            const _Button(),
-            const _Button(),
+            _Button(
+              'Abschließen',
+              () async {
+                await context.read<AppointmentCubit>().finish();
+
+                if (context.mounted) {
+                  context.pop();
+                }
+              },
+            ),
           ],
         ),
       ),
@@ -45,24 +54,25 @@ class AppointmentDetailWidget extends StatelessWidget {
 }
 
 class _Button extends StatelessWidget {
-  const _Button();
+  final String _label;
+  final void Function() _onPressed;
+
+  const _Button(this._label, this._onPressed);
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ElevatedButton(
-        onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Text(
-            'action',
-            style: TextStyle(fontSize: 30),
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: ElevatedButton(
+          onPressed: _onPressed,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              _label,
+              style: const TextStyle(fontSize: 30),
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 class _Entry extends StatelessWidget {
