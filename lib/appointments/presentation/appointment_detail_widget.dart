@@ -25,7 +25,9 @@ class AppointmentDetailWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     _Entry(
-                        Icons.calendar_month, DateFormat.yMMMMd().format(date)),
+                      Icons.calendar_month,
+                      DateFormat.yMMMMd().format(date),
+                    ),
                     _Entry(Icons.schedule, '$duration min'),
                     _Entry(Icons.store, name),
                     _Entry(Icons.signpost, address),
@@ -38,45 +40,69 @@ class AppointmentDetailWidget extends StatelessWidget {
             const Spacer(),
             _Button(
               'Abschließen',
-              () async {
-                final appointmentResult = await showDialog<AppointmentResult>(
-                      context: context,
-                      builder: (context) => const AppointmentResultDialog(
-                        'Der Terminabschluss ...',
-                        [
-                          MapEntry(
-                            'war erfolgreich',
-                            AppointmentState.success,
-                          ),
-                          MapEntry(
-                            'war erfolglos',
-                            AppointmentState.failure,
-                          ),
-                          MapEntry(
-                            'wurde abgebrochen',
-                            AppointmentState.discontinued,
-                          ),
-                        ],
-                      ),
-                    ) ??
-                    AppointmentResult.open();
-
-                if (context.mounted &&
-                    appointmentResult.state != AppointmentState.open) {
-                  await context
-                      .read<AppointmentCubit>()
-                      .finish(appointmentResult);
-
-                  if (context.mounted) {
-                    context.pop();
-                  }
-                }
-              },
+              () => _showDialog(
+                context,
+                'Der Terminn wurde ...',
+                [
+                  const MapEntry(
+                    'erfolgreich abgeschlossen',
+                    AppointmentState.success,
+                  ),
+                  const MapEntry(
+                    'erfolglos abgeschlossen',
+                    AppointmentState.failure,
+                  ),
+                  const MapEntry(
+                    'vorzeitig abgebrochen',
+                    AppointmentState.discontinued,
+                  ),
+                ],
+              ),
+            ),
+            _Button(
+              'Abbrechen',
+              () => _showDialog(
+                context,
+                'Der Termin wurde ...',
+                [
+                  const MapEntry(
+                    'von uns abgebrochen',
+                    AppointmentState.cancelledByUs,
+                  ),
+                  const MapEntry(
+                    'vom Kunden abgebrochen',
+                    AppointmentState.cancelledByCustomer,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _showDialog(
+    BuildContext context,
+    String title,
+    List<MapEntry<String, AppointmentState>> options,
+  ) async {
+    final result = await showDialog<AppointmentResult>(
+          context: context,
+          builder: (context) => AppointmentResultDialog(
+            title,
+            options,
+          ),
+        ) ??
+        AppointmentResult.open();
+
+    if (context.mounted && result.state != AppointmentState.open) {
+      await context.read<AppointmentCubit>().finish(result);
+
+      if (context.mounted) {
+        context.pop();
+      }
+    }
   }
 }
 
