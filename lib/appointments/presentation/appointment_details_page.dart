@@ -10,6 +10,7 @@ class AppointmentDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text('Termin'),
         ),

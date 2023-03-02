@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:kmh/appointments/package.dart';
-import 'package:kmh/appointments/presentation/cubit/appointment_details_state.dart';
 import 'package:storage_tools/base.dart';
 import 'package:storage_tools/remote.dart';
 
@@ -28,8 +27,9 @@ class AppointmentCubit extends Cubit<AppointmentDetailsState> {
     emit(data);
   }
 
-  Future<Either<StorageResponse, Unit>> finish() => _results.add(
-        const AppointmentResult(AppointmentState.success),
+  Future<Either<StorageResponse, Unit>> finish(AppointmentResult result) =>
+      _results.add(
+        result,
         id: _id,
       );
 }

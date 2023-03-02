@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:kmh/appointments/presentation/cubit/appointment_cubit.dart';
+import 'package:kmh/appointments/package.dart';
 
 class AppointmentDetailWidget extends StatelessWidget {
   const AppointmentDetailWidget({super.key});
@@ -39,10 +39,37 @@ class AppointmentDetailWidget extends StatelessWidget {
             _Button(
               'Abschließen',
               () async {
-                await context.read<AppointmentCubit>().finish();
+                final appointmentResult = await showDialog<AppointmentResult>(
+                      context: context,
+                      builder: (context) => const AppointmentResultDialog(
+                        'Der Terminabschluss ...',
+                        [
+                          MapEntry(
+                            'war erfolgreich',
+                            AppointmentState.success,
+                          ),
+                          MapEntry(
+                            'war erfolglos',
+                            AppointmentState.failure,
+                          ),
+                          MapEntry(
+                            'wurde abgebrochen',
+                            AppointmentState.discontinued,
+                          ),
+                        ],
+                      ),
+                    ) ??
+                    AppointmentResult.open();
 
-                if (context.mounted) {
-                  context.pop();
+                if (context.mounted &&
+                    appointmentResult.state != AppointmentState.open) {
+                  await context
+                      .read<AppointmentCubit>()
+                      .finish(appointmentResult);
+
+                  if (context.mounted) {
+                    context.pop();
+                  }
                 }
               },
             ),
