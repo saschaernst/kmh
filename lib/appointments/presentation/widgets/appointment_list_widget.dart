@@ -41,7 +41,7 @@ class _EntryWidget extends StatelessWidget {
         title: Text(_data.name),
         subtitle: Text(_data.city),
         trailing: Text(duration),
-        onTap: () => context.go('/${_data.id}'),
+        onTap: () => context.go('/appointments/${_data.id}'),
       ),
     );
   }

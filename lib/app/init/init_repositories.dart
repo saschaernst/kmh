@@ -1,6 +1,6 @@
 import 'package:appwrite_tools/appwrite_tools.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kmh/app/init/package.dart';
+import 'package:kmh/app/package.dart';
 import 'package:kmh/appointments/package.dart';
 import 'package:storage_tools/remote.dart';
 import 'package:tools/services.dart';
