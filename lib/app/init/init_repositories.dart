@@ -27,7 +27,7 @@ Future<List<RepositoryProvider>> initRepositories() async {
     Company.fromJson,
     Company.empty,
     RemoteStorageMode.readOnly,
-    ['databases.companies.documents'],
+    ['databases.kmh_demo.collections.companies.documents'],
   );
 
   final appointmentDetails = await initRemoteService<AppointmentDetails>(
@@ -39,7 +39,7 @@ Future<List<RepositoryProvider>> initRepositories() async {
     AppointmentDetails.fromJson,
     AppointmentDetails.empty,
     RemoteStorageMode.readOnly,
-    ['databases.appointment_details.documents'],
+    ['databases.kmh_demo.collections.appointment_details.documents'],
   );
 
   final appointmentResults = await initRemoteService<AppointmentResult>(
