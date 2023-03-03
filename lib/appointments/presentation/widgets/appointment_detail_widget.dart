@@ -18,28 +18,29 @@ class AppointmentDetailWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _Entry(
-                      Icons.calendar_month,
-                      DateFormat.yMMMMd().format(date),
-                    ),
-                    _Entry(Icons.schedule, '$duration min'),
-                    _Entry(Icons.store, name),
-                    _Entry(Icons.signpost, address),
-                    _Entry(Icons.location_city, city),
-                    _Entry(Icons.hail, contact),
-                  ],
+            Expanded(
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView(
+                    children: [
+                      _Entry(
+                        Icons.calendar_month,
+                        DateFormat.yMMMMd().format(date),
+                      ),
+                      _Entry(Icons.schedule, '$duration min'),
+                      _Entry(Icons.store, name),
+                      _Entry(Icons.signpost, address),
+                      _Entry(Icons.location_city, city),
+                      _Entry(Icons.hail, contact),
+                    ],
+                  ),
                 ),
               ),
             ),
-            const Spacer(),
             _Button(
               'Abschließen',
+              Colors.blue,
               () => _showDialog(
                 context,
                 'Der Terminn wurde ...',
@@ -60,17 +61,18 @@ class AppointmentDetailWidget extends StatelessWidget {
               ),
             ),
             _Button(
-              'Abbrechen',
+              'Absagen',
+              Colors.orange,
               () => _showDialog(
                 context,
                 'Der Termin wurde ...',
                 [
                   const MapEntry(
-                    'von uns abgebrochen',
+                    'von uns abgesagt',
                     AppointmentState.cancelledByUs,
                   ),
                   const MapEntry(
-                    'vom Kunden abgebrochen',
+                    'vom Kunden abgesagt',
                     AppointmentState.cancelledByCustomer,
                   ),
                 ],
@@ -108,20 +110,22 @@ class AppointmentDetailWidget extends StatelessWidget {
 
 class _Button extends StatelessWidget {
   final String _label;
+  final Color _color;
   final void Function() _onPressed;
 
-  const _Button(this._label, this._onPressed);
+  const _Button(this._label, this._color, this._onPressed);
 
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(backgroundColor: _color),
           onPressed: _onPressed,
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               _label,
-              style: const TextStyle(fontSize: 30),
+              style: const TextStyle(fontSize: 26),
             ),
           ),
         ),
@@ -135,17 +139,14 @@ class _Entry extends StatelessWidget {
   const _Entry(this._icon, this._content);
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: Icon(
-            _icon,
-            size: 40,
-          ),
-          title: Text(
-            _content,
-            style: const TextStyle(fontSize: 28),
-          ),
+  Widget build(BuildContext context) => ListTile(
+        leading: Icon(
+          _icon,
+          size: 40,
+        ),
+        title: Text(
+          _content,
+          style: const TextStyle(fontSize: 24),
         ),
       );
 }

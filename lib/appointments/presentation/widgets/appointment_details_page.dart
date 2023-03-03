@@ -12,7 +12,7 @@ class AppointmentDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: const Text('Termin'),
+          title: const Text('Termindetails'),
         ),
         body: BlocProvider(
           create: (context) => AppointmentCubit(
