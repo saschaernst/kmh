@@ -5,9 +5,9 @@ import 'package:storage_tools/remote.dart';
 import 'package:tools/extensions.dart';
 
 class AppointmentsCubit extends Cubit<AppointmentsState> {
-  final RemoteStorageService<Company> _companies;
-  final RemoteStorageService<AppointmentDetails> _details;
-  final RemoteStorageService<AppointmentResult> _results;
+  final CompanyService _companies;
+  final DetailService _details;
+  final ResultService _results;
 
   final List<RemoveListener> _listeners = [];
 

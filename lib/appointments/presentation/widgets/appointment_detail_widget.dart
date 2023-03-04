@@ -9,7 +9,7 @@ class AppointmentDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = context.read<AppointmentCubit>().state;
+    final data = context.watch<AppointmentListCubit>().state;
 
     return data.when(
       loading: () => const CircularProgressIndicator.adaptive(),
@@ -99,7 +99,7 @@ class AppointmentDetailWidget extends StatelessWidget {
         AppointmentResult.open();
 
     if (context.mounted && result.state != AppointmentState.open) {
-      await context.read<AppointmentCubit>().finish(result);
+      await context.read<AppointmentListCubit>().finish(result);
 
       if (context.mounted) {
         context.pop();
