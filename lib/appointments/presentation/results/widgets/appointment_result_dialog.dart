@@ -38,7 +38,7 @@ class AppointmentResultDialog extends HookWidget {
           ),
         ),
         ElevatedButton(
-          onPressed: _handleOk(result.value, textController, context),
+          onPressed: _handleOk(result.value, textController.text, context),
           child: const Text('Ok'),
         ),
       ],
@@ -47,14 +47,14 @@ class AppointmentResultDialog extends HookWidget {
 
   void Function()? _handleOk(
     AppointmentResult result,
-    TextEditingController textController,
+    String comment,
     BuildContext context,
   ) =>
       result == AppointmentResult.open()
           ? null
           : () {
               final data = result.copyWith(
-                comment: textController.text,
+                comment: comment,
               );
               context.pop(data);
             };
@@ -68,16 +68,15 @@ class _DialogButton extends StatelessWidget {
   const _DialogButton(this._label, this._state, this._result);
 
   @override
-  Widget build(BuildContext context) {
-    return RadioMenuButton<AppointmentState>(
-      value: _state,
-      groupValue: _result.value.state,
-      onChanged: (value) => _onChanged(value),
-      child: Text(_label),
-    );
-  }
+  Widget build(BuildContext context) => RadioMenuButton<AppointmentState>(
+        value: _state,
+        groupValue: _result.value.state,
+        onChanged: (value) => _onChanged(value),
+        child: Text(_label),
+      );
 
-  void _onChanged(AppointmentState? state) {
-    _result.value = _result.value.copyWith(state: state!);
-  }
+  void _onChanged(AppointmentState? state) =>
+      _result.value = _result.value.copyWith(
+        state: state!,
+      );
 }

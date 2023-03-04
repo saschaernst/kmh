@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:kmh/app/package.dart';
 import 'package:kmh/appointments/package.dart';
 
 class AppointmentDetailWidget extends StatelessWidget {
@@ -43,7 +44,7 @@ class AppointmentDetailWidget extends StatelessWidget {
               Colors.blue,
               () => _showDialog(
                 context,
-                'Der Terminn wurde ...',
+                'Der Termin wurde ...',
                 [
                   const MapEntry(
                     'erfolgreich abgeschlossen',
@@ -89,7 +90,7 @@ class AppointmentDetailWidget extends StatelessWidget {
     String title,
     List<MapEntry<String, AppointmentState>> options,
   ) async {
-    final result = await showDialog<AppointmentResult>(
+    final appointmentResult = await showDialog<AppointmentResult>(
           context: context,
           builder: (context) => AppointmentResultDialog(
             title,
@@ -98,11 +99,35 @@ class AppointmentDetailWidget extends StatelessWidget {
         ) ??
         AppointmentResult.open();
 
-    if (context.mounted && result.state != AppointmentState.open) {
-      await context.read<AppointmentListCubit>().finish(result);
+    if (context.mounted && appointmentResult.state != AppointmentState.open) {
+      final result = await context.read<AppointmentListCubit>().finish(
+            appointmentResult,
+          );
 
       if (context.mounted) {
-        context.pop();
+        result.match(
+          (l) {
+            l.when(
+              warning: (message) async {
+                showSnackBar(
+                  context,
+                  Text(message),
+                );
+                //await Future.delayed(const Duration(seconds: 3));
+
+                if (context.mounted) {
+                  context.pop();
+                }
+              },
+              error: (message) => showAlertDialog(
+                context,
+                'Fehler!!!',
+                message,
+              ),
+            );
+          },
+          (r) => context.pop(),
+        );
       }
     }
   }
