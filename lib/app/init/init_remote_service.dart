@@ -22,19 +22,19 @@ Future<RemoteStorageService<T>> initRemoteService<T>(
     (v) => LocalStorageRepo(v, getDefault),
   );
 
-  final remoteCache = await createSembastRepo(
-    '${collectionId}_cache',
-    StorageEvent.fromJson,
-    (v) => LocalStorageRepo(v, StorageEvent.empty),
+  final changesRepo = await createSembastRepo(
+    '${collectionId}_changes',
+    StorageChange.fromJson,
+    (v) => LocalStorageRepo(v, StorageChange.no),
   );
 
   final remoteSource = AppwriteStorage(
-    serviceProvider.databases,
+    serviceProvider.client,
     databaseId,
     collectionId,
     toJson,
     fromJson,
-    serviceProvider.subscribeTo(channels),
+    channels,
   );
 
   final remoteRepo = RemoteStorageRepo(
@@ -45,7 +45,7 @@ Future<RemoteStorageService<T>> initRemoteService<T>(
   final remoteService = RemoteStorageService(
     remoteRepo,
     localRepo,
-    remoteCache,
+    changesRepo,
     uuids,
     mode,
   );
