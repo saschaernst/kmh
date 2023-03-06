@@ -5,11 +5,12 @@ import 'package:kmh/app/package.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  final repos = await initRepositories();
   final router = initRouter();
 
   runApp(
     MultiRepositoryProvider(
-      providers: await initRepositories(),
+      providers: repos,
       child: AppView(router),
     ),
   );
