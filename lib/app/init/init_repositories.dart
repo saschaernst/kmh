@@ -1,27 +1,42 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite_tools/appwrite_tools.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:kmh/app/package.dart';
 import 'package:kmh/appointments/package.dart';
 import 'package:storage_tools/remote.dart';
 import 'package:tools/services.dart';
 
 Future<List<RepositoryProvider>> initRepositories() async {
-  final appwriteService = AppwriteService(
+  final client = AppwriteService(
     //'https://cloud.appwrite.io/v1',
     'http://192.168.0.45/v1',
     'kmh_demo',
-  );
+  ).client;
 
-  await appwriteService.createEmailSession(
-    email: 'sascha.m.ernst@gmail.com',
-    password: 'kmh_secret',
-  );
+  final authService = AppwriteAuthenticationService()
+    ..setSessionCreator(
+      () => Account(client).createEmailSession(
+        email: 'sascha.m.ernst@gmail.com',
+        password: 'kmh_secret',
+      ),
+    );
+
+  //await authService.login();
 
   final uuidService = UuidService();
+  final connectivityService = ConnectivityService(
+    Connectivity(),
+    InternetConnectionChecker(),
+  );
+  await connectivityService.init();
 
   final companies = await initRemoteService<Company>(
-    appwriteService,
+    client,
+    connectivityService,
+    authService,
     uuidService,
     'kmh_demo',
     'companies',
@@ -33,7 +48,9 @@ Future<List<RepositoryProvider>> initRepositories() async {
   );
 
   final appointmentDetails = await initRemoteService<AppointmentDetails>(
-    appwriteService,
+    client,
+    connectivityService,
+    authService,
     uuidService,
     'kmh_demo',
     'appointment_details',
@@ -45,7 +62,9 @@ Future<List<RepositoryProvider>> initRepositories() async {
   );
 
   final appointmentResults = await initRemoteService<AppointmentResult>(
-    appwriteService,
+    client,
+    connectivityService,
+    authService,
     uuidService,
     'kmh_demo',
     'appointment_results',

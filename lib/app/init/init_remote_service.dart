@@ -1,3 +1,4 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite_tools/appwrite_tools.dart';
 import 'package:sembast_tools/sembast_tools.dart';
 import 'package:storage_tools/local.dart';
@@ -6,7 +7,9 @@ import 'package:tools/services.dart';
 import 'package:tools/utils.dart';
 
 Future<RemoteStorageService<T>> initRemoteService<T>(
-  AppwriteService serviceProvider,
+  Client client,
+  ConnectivityService connectivityService,
+  AuthenticationService authenticationService,
   UuidService uuids,
   String databaseId,
   String collectionId,
@@ -29,7 +32,7 @@ Future<RemoteStorageService<T>> initRemoteService<T>(
   );
 
   final remoteSource = AppwriteStorage(
-    serviceProvider.client,
+    client,
     databaseId,
     collectionId,
     toJson,
@@ -46,11 +49,13 @@ Future<RemoteStorageService<T>> initRemoteService<T>(
     remoteRepo,
     localRepo,
     changesRepo,
+    connectivityService,
+    authenticationService,
     uuids,
     mode,
   );
 
-  await remoteService.init();
+  //await remoteService.init();
 
   return remoteService;
 }
