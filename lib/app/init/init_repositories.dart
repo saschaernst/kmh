@@ -1,4 +1,5 @@
 import 'package:appwrite_tools/appwrite_tools.dart';
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kmh/app/package.dart';
 import 'package:kmh/appointments/package.dart';
@@ -55,6 +56,7 @@ Future<List<RepositoryProvider>> initRepositories() async {
   );
 
   final repos = [
+    RepositoryProvider(create: (_) => EventBus()),
     RepositoryProvider(create: (_) => companies),
     RepositoryProvider(create: (_) => appointmentDetails),
     RepositoryProvider(create: (_) => appointmentResults),
