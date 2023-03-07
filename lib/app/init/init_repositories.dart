@@ -11,8 +11,8 @@ import 'package:tools/services.dart';
 
 Future<List<RepositoryProvider>> initRepositories() async {
   final client = AppwriteService(
-    //'https://cloud.appwrite.io/v1',
-    'http://192.168.0.45/v1',
+    'https://cloud.appwrite.io/v1',
+    //'http://192.168.0.45/v1',
     'kmh_demo',
   ).client;
 

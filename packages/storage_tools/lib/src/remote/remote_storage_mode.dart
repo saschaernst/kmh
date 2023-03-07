@@ -1,0 +1,4 @@
+enum RemoteStorageMode {
+  readOnly,
+  fullAccess,
+}

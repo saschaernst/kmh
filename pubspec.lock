@@ -28,7 +28,7 @@ packages:
   appwrite_tools:
     dependency: "direct main"
     description:
-      path: "../../packages/appwrite_tools"
+      path: "packages/appwrite_tools"
       relative: true
     source: path
     version: "0.0.1"
@@ -730,7 +730,7 @@ packages:
   sembast_tools:
     dependency: "direct main"
     description:
-      path: "../../packages/sembast_tools"
+      path: "packages/sembast_tools"
       relative: true
     source: path
     version: "0.0.1"
@@ -830,7 +830,7 @@ packages:
   storage_tools:
     dependency: "direct main"
     description:
-      path: "../../packages/storage_tools"
+      path: "packages/storage_tools"
       relative: true
     source: path
     version: "0.0.1"
@@ -893,7 +893,7 @@ packages:
   tools:
     dependency: "direct main"
     description:
-      path: "../../packages/tools"
+      path: "packages/tools"
       relative: true
     source: path
     version: "0.0.1"
