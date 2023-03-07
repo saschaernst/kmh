@@ -16,6 +16,8 @@ class AppointmentResultsPage extends StatelessWidget {
             ),
           ],
         ),
-        body: Container(),
+        body: SafeArea(
+          child: Container(),
+        ),
       );
 }

@@ -17,13 +17,15 @@ class AppointmentListPage extends StatelessWidget {
             ),
           ],
         ),
-        body: BlocProvider(
-          create: (_) => AppointmentsCubit(
-            context.read<CompanyService>(),
-            context.read<DetailService>(),
-            context.read<ResultService>(),
+        body: SafeArea(
+          child: BlocProvider(
+            create: (_) => AppointmentsCubit(
+              context.read<CompanyService>(),
+              context.read<DetailService>(),
+              context.read<ResultService>(),
+            ),
+            child: const AppointmentListWidget(),
           ),
-          child: const AppointmentListWidget(),
         ),
       );
 }

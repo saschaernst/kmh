@@ -13,14 +13,16 @@ class AppointmentDetailsPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Termindetails'),
         ),
-        body: BlocProvider(
-          create: (context) => AppointmentListCubit(
-            context.read<CompanyService>(),
-            context.read<DetailService>(),
-            context.read<ResultService>(),
-            _id,
+        body: SafeArea(
+          child: BlocProvider(
+            create: (context) => AppointmentListCubit(
+              context.read<CompanyService>(),
+              context.read<DetailService>(),
+              context.read<ResultService>(),
+              _id,
+            ),
+            child: const AppointmentDetailWidget(),
           ),
-          child: const AppointmentDetailWidget(),
         ),
       );
 }
