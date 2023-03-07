@@ -55,8 +55,8 @@ class AppointmentListCubit extends Cubit<AppointmentDetailsState>
       );
 
   @override
-  Future<void> close() {
-    cancelSubs();
+  Future<void> close() async {
+    await disposeSubs();
 
     return super.close();
   }

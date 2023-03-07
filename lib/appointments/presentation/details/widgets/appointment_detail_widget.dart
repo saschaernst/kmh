@@ -113,7 +113,6 @@ class AppointmentDetailWidget extends StatelessWidget {
                   context,
                   Text(message),
                 );
-                //await Future.delayed(const Duration(seconds: 3));
 
                 if (context.mounted) {
                   context.pop();

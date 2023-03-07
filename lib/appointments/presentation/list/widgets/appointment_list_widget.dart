@@ -9,7 +9,7 @@ class AppointmentListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final list = context.watch<AppointmentsCubit>().state.data;
+    final list = context.watch<AppointmentsCubit>().state;
 
     return ListView.builder(
       itemCount: list.length,

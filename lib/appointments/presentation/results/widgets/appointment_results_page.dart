@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kmh/appointments/package.dart';
+import 'package:kmh/appointments/presentation/results/widgets/appointment_results_widget.dart';
 
 class AppointmentResultsPage extends StatelessWidget {
   const AppointmentResultsPage({super.key});
@@ -17,7 +18,14 @@ class AppointmentResultsPage extends StatelessWidget {
           ],
         ),
         body: SafeArea(
-          child: Container(),
+          child: BlocProvider(
+            create: (context) => AppointmentResultsCubit(
+              context.read<CompanyService>(),
+              context.read<DetailService>(),
+              context.read<ResultService>(),
+            ),
+            child: const AppointmentResultsWidget(),
+          ),
         ),
       );
 }

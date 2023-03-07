@@ -1,34 +1,32 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:kmh/appointments/package.dart';
-import 'package:state_notifier/state_notifier.dart';
 import 'package:storage_tools/remote.dart';
 import 'package:tools/extensions.dart';
+import 'package:tools/utils.dart';
 
-class AppointmentsCubit extends Cubit<AppointmentsState> {
+class AppointmentsCubit extends Cubit<List<AppointmentsData>>
+    with ListenersMixin {
   final CompanyService _companies;
   final DetailService _details;
   final ResultService _results;
-
-  final List<RemoveListener> _listeners = [];
 
   AppointmentsCubit(
     this._companies,
     this._details,
     this._results,
-  ) : super(AppointmentsState(const [])) {
+  ) : super(const []) {
     _addListener(_companies);
     _addListener(_details);
     _addListener(_results);
     _renderData();
   }
 
-  void _addListener<T>(RemoteStorageService<T> service) {
-    final listener = service.notifier.addListener(
-      (state) => _renderData(),
-      fireImmediately: false,
-    );
-    _listeners.add(listener);
-  }
+  void _addListener<T>(RemoteStorageService<T> service) => addByNotifier(
+        service.notifier,
+        (_) => _renderData(),
+        fireImmediately: false,
+      );
 
   Future<void> _renderData() async {
     final sortedKeys = _details.all.getSortedKeys(
@@ -56,15 +54,30 @@ class AppointmentsCubit extends Cubit<AppointmentsState> {
       }
     }
 
-    emit(AppointmentsState(list));
+    emit(list);
   }
 
   @override
   Future<void> close() {
-    for (final listener in _listeners) {
-      listener();
-    }
+    disposeListeners();
 
     return super.close();
   }
+}
+
+@immutable
+class AppointmentsData {
+  final String id;
+  final DateTime date;
+  final int duration;
+  final String name;
+  final String city;
+
+  const AppointmentsData(
+    this.id,
+    this.date,
+    this.duration,
+    this.name,
+    this.city,
+  );
 }
