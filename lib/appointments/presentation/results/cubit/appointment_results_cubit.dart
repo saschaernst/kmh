@@ -42,6 +42,7 @@ class AppointmentResultsCubit extends Cubit<List<AppointmentResultData>>
       final data = AppointmentResultData(
         key,
         company.name,
+        result.comment,
         result.state,
       );
 
@@ -64,7 +65,8 @@ class AppointmentResultsCubit extends Cubit<List<AppointmentResultData>>
 class AppointmentResultData {
   final String id;
   final String name;
+  final String comment;
   final AppointmentState state;
 
-  const AppointmentResultData(this.id, this.name, this.state);
+  const AppointmentResultData(this.id, this.name, this.comment, this.state);
 }
