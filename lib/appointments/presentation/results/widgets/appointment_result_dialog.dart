@@ -38,26 +38,29 @@ class AppointmentResultDialog extends HookWidget {
           ),
         ),
         ElevatedButton(
-          onPressed: _handleOk(result.value, textController.text, context),
+          onPressed: result.value == AppointmentResult.open()
+              ? null
+              : () => _handleOk(
+                    context,
+                    result.value,
+                    textController.text,
+                  ),
           child: const Text('Ok'),
         ),
       ],
     );
   }
 
-  void Function()? _handleOk(
+  void _handleOk(
+    BuildContext context,
     AppointmentResult result,
     String comment,
-    BuildContext context,
   ) =>
-      result == AppointmentResult.open()
-          ? null
-          : () {
-              final data = result.copyWith(
-                comment: comment,
-              );
-              context.pop(data);
-            };
+      context.pop(
+        result.copyWith(
+          comment: comment,
+        ),
+      );
 }
 
 class _DialogButton extends StatelessWidget {
