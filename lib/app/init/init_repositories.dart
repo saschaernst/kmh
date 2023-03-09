@@ -24,7 +24,7 @@ Future<List<RepositoryProvider>> initRepositories() async {
       ),
     );
 
-  //await authService.login();
+  await authService.login();
 
   final uuidService = UuidService();
   final connectivityService = ConnectivityService(
